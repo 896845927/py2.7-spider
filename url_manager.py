@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # _*_ coding: utf-8 _*_
+
+
 class UrlManager(object):
 
     def __init__(self):
@@ -15,7 +17,7 @@ class UrlManager(object):
             return True
 
     def get_new_url(self):
-        new_url = self.new_urls.pop()
+        new_url = self.new_urls.pop().encode('utf8')
         self.old_urls.add(new_url)
         return new_url
 

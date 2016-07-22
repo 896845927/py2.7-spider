@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # _*_ coding: utf-8 _*_
-import urllib2
 
+import requests
 
 class HtmlDownloader(object):
+
     def download_html(self, new_url):
         if new_url is None:
             return None
-        response = urllib2.urlopen(new_url)
-        if response.getcode() != 200:
-            return None
-        return response.read()
+        headers = {'user-agent': 'Chrome/51.0.2704.103'}
+        r = requests.get(new_url, headers=headers)
+        r.raise_for_status()
+        return r.text.encode('utf-8')
