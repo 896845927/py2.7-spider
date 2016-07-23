@@ -11,6 +11,7 @@ class HtmlOutputer(object):
         self.data.extend(new_data)
 
     def output(self, movie_name):
-        file_name = time.strftime("%Y-%m-%d", time.localtime())+"-metacritic-"+movie_name+".txt"
+        file_name = time.strftime("%Y-%m-%d", time.localtime())+"-metacritic.txt"
         with open(file_name, "w") as f:
-            f.writelines(self.data)
+            for data in self.data:
+                f.write(movie_name+"\t"+data+"\n")
