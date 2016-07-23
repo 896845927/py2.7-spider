@@ -18,17 +18,21 @@ class Spider(object):
         query_url = domain+'/search/movie/'+keyword+'/results'
         query_cont = self.downloader.download_html(query_url)
         results = self.parser.parse_query(query_cont)
+        # print(type(results.)
         for result in results:
-            self.craw_review(domain, result['url']+"/user-reviews?page=0", result['name'])
+            # print(type(result["url"]))
+            self.craw_review(domain, result["url"]+"/user-reviews?page=0", result["name"])
 
     def craw_review(self, domain, start_url, movie_name):
-        """爬取评论页面"""
         self.urls.add_new_url(start_url)
         while self.urls.has_new_url():
             try:
                 new_url = self.urls.get_new_url()
+                print(domain)
+                print(new_url)
                 new_url = domain + new_url
-                print("new_url:", new_url)
+
+                # print("new_url:"+new_url)
                 html_cont = self.downloader.download_html(new_url)
                 # with open("html_content.txt","r") as f:
                 #     html_cont = f.read()
@@ -36,5 +40,5 @@ class Spider(object):
                 self.urls.add_new_urls(new_urls)
                 self.html_outputer.collect_data(new_data)
             except:
-                print "craw fail"
+                print("craw fail")
         self.html_outputer.output(movie_name)

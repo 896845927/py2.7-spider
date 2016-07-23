@@ -17,7 +17,7 @@ class UrlManager(object):
             return True
 
     def get_new_url(self):
-        new_url = self.new_urls.pop().encode('utf8')
+        new_url = self.new_urls.pop()
         self.old_urls.add(new_url)
         return new_url
 

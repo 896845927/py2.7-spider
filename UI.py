@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-
-from Tkinter import *
-import ttk
-import tkMessageBox
+import tkinter
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+# import tkMessageBox
 
 from spider_main import Spider
 
@@ -11,7 +12,7 @@ from spider_main import Spider
 class Select(Frame):
     def __init__(self, list, spider, master=None):
         Frame.__init__(self, master)
-        self.Combobox = ttk.Combobox(self, text="", values=list, width=30)
+        self.Combobox = tkinter.ttk.Combobox(self, text="", values=list, width=30)
         self.label = Label(self, text="Keyword")
         self.Entry = Entry(self)
         self.button = Button(self, text='craw', command=self.craw)
@@ -26,7 +27,7 @@ class Select(Frame):
         domain = self.Combobox.get()
         print(keyword,domain)
         spider.craw(domain, keyword)
-        tkMessageBox.showinfo('Message', 'done')
+        tkinter.messagebox.showinfo('Message', 'done')
 spider = Spider()
 app = Select(["http://www.metacritic.com"], spider)
 app.mainloop()

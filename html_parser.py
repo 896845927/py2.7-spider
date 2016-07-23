@@ -8,7 +8,7 @@ import re
 class HtmlParser(object):
 
     def parse_query(self, html_cont):
-        """解析关键字搜索结果"""
+        # """解析关键字搜索结果"""
         if html_cont is None or len(html_cont) == 0:
             return
         soup = BeautifulSoup(html_cont, "html.parser", from_encoding='utf-8')
@@ -16,7 +16,7 @@ class HtmlParser(object):
         parse_results = []
         for result in results:
             movie = result.find("h3", class_="product_title").find("a")
-            parse_results.append({"url":movie['href'].encode('utf8'), "name": movie.string.encode('utf8')})
+            parse_results.append({"url":movie["href"], "name": movie.string})
         return parse_results
 
     def parse_html(self, html_cont):
@@ -50,5 +50,5 @@ class HtmlParser(object):
             user_com = user_review.find("span", class_="blurb_expanded")
             if user_com is None:
                 user_com = user_review.find("div", class_="review_body")
-            new_datas.append(name.text.strip().encode('utf8')+"\t"+score.text.encode('utf8')+"\t"+date.text.encode('utf8')+"\t"+user_com.text.encode('utf8'))
+            new_datas.append(name.text.strip()+"\t"+score.text+"\t"+date.text+"\t"+user_com.text)
         return new_datas
