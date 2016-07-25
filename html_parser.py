@@ -50,5 +50,8 @@ class HtmlParser(object):
             user_com = user_review.find("span", class_="blurb_expanded")
             if user_com is None:
                 user_com = user_review.find("div", class_="review_body")
-            new_datas.append(name.text.strip().encode('utf8')+"\t"+score.text.encode('utf8')+"\t"+date.text.encode('utf8')+"\t"+user_com.text.encode('utf8'))
+            new_datas.append(name.text.strip().encode('utf8')+"\t"
+                             +score.text.encode('utf8')+"\t"
+                             +re.sub(' |, ', ',', date.text.encode('utf8'))+"\t"
+                             +re.sub('[\n\r<br>]', '', user_com.text.encode('utf8')))
         return new_datas
